@@ -1,14 +1,18 @@
 package com.immunization.reference.model;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@Builder
+@RequiredArgsConstructor
 public class PostHL7RequestBody {
 
-  @Getter  @Setter
   private String hl7Payload;
 
-  @Getter  @Setter
   private ConnectionInfo connectionInfo;
 
 }

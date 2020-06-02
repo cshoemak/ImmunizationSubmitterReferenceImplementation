@@ -1,17 +1,20 @@
 package com.immunization.reference.model;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@Builder
+@RequiredArgsConstructor
 public class TestData {
 
-  @Getter  @Setter
   private String testType;
 
-  @Getter  @Setter
   private String testResult;
 
-  @Getter  @Setter
   private String testDate;
 
 }
