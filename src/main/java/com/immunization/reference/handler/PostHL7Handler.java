@@ -8,16 +8,17 @@ import com.immunization.reference.model.GatewayResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ImmunizationSubmitterHandler implements RequestHandler<Map<String, Object>, GatewayResponse> {
+public class PostHL7Handler implements RequestHandler<Map<String, Object>, GatewayResponse> {
 
     private final HandlerDependencies dependencies;
 
     // Required for API gateway
-    public  ImmunizationSubmitterHandler() {
+    public PostHL7Handler() {
+
         dependencies = new HandlerDependencies();
     }
 
-    public ImmunizationSubmitterHandler(final HandlerDependencies dependencies) {
+    public PostHL7Handler(final HandlerDependencies dependencies) {
 
         this.dependencies = dependencies;
     }
@@ -27,11 +28,6 @@ public class ImmunizationSubmitterHandler implements RequestHandler<Map<String, 
         final Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        final String hl7Message = dependencies.getHl7MessageManager().generateTestMessage();
-        final String response = dependencies.getIisManager().submitMessage(
-                "test_iis_username", "test123", "test_iis_facility", hl7Message
-        );
-
-        return new GatewayResponse(response, headers, 200);
+        return new GatewayResponse("Success", headers, 200);
     }
 }

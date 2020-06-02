@@ -17,12 +17,12 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
 
-public class ImmunizationSubmitterHandlerTest {
+public class GenerateHL7HandlerTest {
 
     private static final String TEST_HL7_MESSAGE = "Test Message";
     private static final String TEST_IIS_RESPONSE = "Test Response";
 
-    private ImmunizationSubmitterHandler handler;
+    private GenerateHL7Handler handler;
 
     @Mock
     private Context mockContext;
@@ -44,7 +44,7 @@ public class ImmunizationSubmitterHandlerTest {
         when(mockDependencies.getIisManager()).thenReturn(mockIISManager);
         when(mockDependencies.getHl7MessageManager()).thenReturn(mockHL7MessageManager);
 
-        handler = new ImmunizationSubmitterHandler(mockDependencies);
+        handler = new GenerateHL7Handler(mockDependencies);
     }
 
     @Test

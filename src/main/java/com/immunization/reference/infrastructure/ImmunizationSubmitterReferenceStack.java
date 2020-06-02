@@ -26,22 +26,36 @@ public class ImmunizationSubmitterReferenceStack extends Stack {
 
         super(scope, id, props);
 
-        RestApi api = RestApi.Builder.create(this, "immunization-submitter-api")
+        final RestApi api = RestApi.Builder.create(this, "immunization-submitter-api")
                 .restApiName("Immunization submitter")
                 .description("This API will receive patient information and post it to IIS")
                 .build();
 
-        Function lambdaFunction =
-                Function.Builder.create(this, "ImmunizationSubmitterHandler")
+        final Function generateHL7Lambda =
+                Function.Builder.create(this, "GenerateHL7Handler")
                         .code(Code.fromAsset("./target/ImmunizationSubmitterReferenceImplementation-1.0-SNAPSHOT.jar"))
-                        .handler("com.immunization.reference.handler.ImmunizationSubmitterHandler")
+                        .handler("com.immunization.reference.handler.GenerateHL7Handler")
                         .timeout(Duration.seconds(300))
                         .runtime(Runtime.JAVA_8)
                         .build();
 
-        IResource items = api.getRoot().addResource("request");
+        final Function postHL7Lambda =
+                Function.Builder.create(this, "PostHL7Handler")
+                        .code(Code.fromAsset("./target/ImmunizationSubmitterReferenceImplementation-1.0-SNAPSHOT.jar"))
+                        .handler("com.immunization.reference.handler.PostHL7Handler")
+                        .timeout(Duration.seconds(300))
+                        .runtime(Runtime.JAVA_8)
+                        .build();
 
-        Integration lambdaIntegration = new LambdaIntegration(lambdaFunction);
-        items.addMethod("POST", lambdaIntegration);
+
+
+        final Integration generateHL7LambdaIntegration = new LambdaIntegration(generateHL7Lambda);
+        final IResource generateHL7Resource = api.getRoot().addResource("generateHL7");
+        generateHL7Resource.addMethod("POST", generateHL7LambdaIntegration);
+
+
+        final Integration postHL7LambdaIntegration = new LambdaIntegration(postHL7Lambda);
+        final IResource postHL7Resource = api.getRoot().addResource("postHL7");
+        postHL7Resource.addMethod("POST", postHL7LambdaIntegration);
     }
 }
