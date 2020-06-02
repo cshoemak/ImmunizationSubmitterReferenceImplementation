@@ -121,10 +121,40 @@
             <version>2.3.1</version>
         </dependency>
         <dependency>
-          <groupId>org.projectlombok</groupId>
-          <artifactId>lombok</artifactId>
-          <version>1.18.12</version>
-          <scope>provided</scope>
-      </dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>cloudfront</artifactId>
+            <version>[1.19.0, 2)</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>route53</artifactId>
+            <version>[1.19.0, 2)</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>route53-targets</artifactId>
+            <version>[1.19.0, 2)</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>s3</artifactId>
+            <version>[1.19.0, 2)</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>s3-deployment</artifactId>
+            <version>[1.19.0, 2)</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>certificatemanager</artifactId>
+            <version>[1.19.0, 2)</version>
+        </dependency>
     </dependencies>
 </project>
