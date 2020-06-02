@@ -1,18 +1,21 @@
 package com.immunization.reference.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @Builder
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Covid19TestingResults {
 
-  private final String testType;
+  private String testType;
 
-  private final String testResult;
+  private String testResult;
 
-  private final String testDate;
+  private String testDate;
 
 }

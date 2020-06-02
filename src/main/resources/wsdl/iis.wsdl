@@ -153,7 +153,7 @@
     <!--  Service definition  -->
     <service name="client_Service">
         <port binding="tns:client_Binding_Soap12" name="client_Port_Soap12">
-            <soap12:address location="http://florence.immregistries.org/iis-sandbox/soap"/>
+            <soap12:address location="http://localhost:8282/wsdl-demo"/>
         </port>
     </service>
 </definitions>

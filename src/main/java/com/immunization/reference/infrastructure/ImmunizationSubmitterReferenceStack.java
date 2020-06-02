@@ -33,7 +33,7 @@ public class ImmunizationSubmitterReferenceStack extends Stack {
 
         final Function generateHL7Lambda =
                 Function.Builder.create(this, "GenerateHL7Handler")
-                        .code(Code.fromAsset("./target/ImmunizationSubmitterReferenceImplementation-1.0-SNAPSHOT.jar"))
+                        .code(Code.fromAsset("./target/ImmunizationSubmitterReferenceImplementation-1.0-SNAPSHOT-jar-with-dependencies.jar"))
                         .handler("com.immunization.reference.handler.GenerateHL7Handler")
                         .timeout(Duration.seconds(300))
                         .runtime(Runtime.JAVA_8)
@@ -41,7 +41,7 @@ public class ImmunizationSubmitterReferenceStack extends Stack {
 
         final Function postHL7Lambda =
                 Function.Builder.create(this, "PostHL7Handler")
-                        .code(Code.fromAsset("./target/ImmunizationSubmitterReferenceImplementation-1.0-SNAPSHOT.jar"))
+                        .code(Code.fromAsset("./target/ImmunizationSubmitterReferenceImplementation-1.0-SNAPSHOT-jar-with-dependencies.jar"))
                         .handler("com.immunization.reference.handler.PostHL7Handler")
                         .timeout(Duration.seconds(300))
                         .runtime(Runtime.JAVA_8)

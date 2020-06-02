@@ -1,35 +1,37 @@
 package com.immunization.reference.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @Builder
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class PatientDetails {
 
-  private final String mrn;
-  private final String mrnAuthority;
-  private final String nameFirst;
-  private final String nameMiddle;
-  private final String nameLast;
-  private final String nameType;
-  private final String motherMaidenNameLast;
-  private final String dateOfBirth;
-  private final String sex;
-  private final String race;
-  private final String ethnicity;
-  private final String phoneAreaCode;
-  private final String phoneNumber;
-  private final String addressLine1;
-  private final String addressLine2;
-  private final String addressCity;
-  private final String addressState;
-  private final String addressZip;
-  private final String addressCountry;
-  private final String guardianNameFirst;
-  private final String guardianNameLast;
-  private final String guardianRelationship;
-
+  private String mrn;
+  private String mrnAuthority;
+  private String nameFirst;
+  private String nameMiddle;
+  private String nameLast;
+  private String nameType;
+  private String motherMaidenNameLast;
+  private String dateOfBirth;
+  private String sex;
+  private String race;
+  private String ethnicity;
+  private String phoneAreaCode;
+  private String phoneNumber;
+  private String addressLine1;
+  private String addressLine2;
+  private String addressCity;
+  private String addressState;
+  private String addressZip;
+  private String addressCountry;
+  private String guardianNameFirst;
+  private String guardianNameLast;
+  private String guardianRelationship;
 }

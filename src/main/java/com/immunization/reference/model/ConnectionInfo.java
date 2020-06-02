@@ -1,20 +1,22 @@
 package com.immunization.reference.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@RequiredArgsConstructor
 public class ConnectionInfo {
 
-  private final String userId;
+    private String userId;
 
-  private final String password;
+    private String password;
 
-  private final String facility;
+    private String facility;
 
-  private final String iisUrl;
+    private String iisUrl;
 
 }
