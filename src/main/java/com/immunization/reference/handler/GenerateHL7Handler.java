@@ -5,10 +5,11 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.immunization.reference.config.HandlerDependencies;
 import com.immunization.reference.model.GatewayResponse;
 
+import com.immunization.reference.model.GenerateHL7RequestBody;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GenerateHL7Handler implements RequestHandler<Map<String, Object>, GatewayResponse> {
+public class GenerateHL7Handler implements RequestHandler<GenerateHL7RequestBody, GatewayResponse> {
 
     private final HandlerDependencies dependencies;
 
@@ -22,7 +23,7 @@ public class GenerateHL7Handler implements RequestHandler<Map<String, Object>, G
         this.dependencies = dependencies;
     }
 
-    @Override public GatewayResponse handleRequest(final Map<String, Object> input, final Context context) {
+    @Override public GatewayResponse handleRequest(final GenerateHL7RequestBody input, final Context context) {
 
         final Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
