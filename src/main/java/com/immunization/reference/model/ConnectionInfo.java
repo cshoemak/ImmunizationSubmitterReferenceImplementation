@@ -1,41 +1,20 @@
 package com.immunization.reference.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class ConnectionInfo {
 
+  @Getter  @Setter
   private String userId;
+
+  @Getter  @Setter
   private String password;
+
+  @Getter  @Setter
   private String facility;
-  private String path;
 
-  public String getUserId() {
-    return userId;
-  }
+  @Getter  @Setter
+  private String iisUrl;
 
-  public void setUserId(String userId) {
-    this.userId = userId;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
-  public String getFacility() {
-    return facility;
-  }
-
-  public void setFacility(String facility) {
-    this.facility = facility;
-  }
-
-  public String getPath() {
-    return path;
-  }
-
-  public void setPath(String path) {
-    this.path = path;
-  }
 }

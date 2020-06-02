@@ -1,32 +1,16 @@
 package com.immunization.reference.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class GenerateHL7RequestBody {
 
+  @Getter  @Setter
   private PatientDetails patientDetails;
+
+  @Getter  @Setter
   private ConnectionInfo connectionInfo;
-  private String testResult;
 
-  public PatientDetails getPatientDetails() {
-    return patientDetails;
-  }
-
-  public void setPatientDetails(PatientDetails patientDetails) {
-    this.patientDetails = patientDetails;
-  }
-
-  public ConnectionInfo getConnectionInfo() {
-    return connectionInfo;
-  }
-
-  public void setConnectionInfo(ConnectionInfo connectionInfo) {
-    this.connectionInfo = connectionInfo;
-  }
-
-  public String getTestResult() {
-    return testResult;
-  }
-
-  public void setTestResult(String testResult) {
-    this.testResult = testResult;
-  }
+  @Getter  @Setter
+  private TestData testData;
 }
