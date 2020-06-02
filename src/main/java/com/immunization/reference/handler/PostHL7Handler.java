@@ -5,10 +5,11 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.immunization.reference.config.HandlerDependencies;
 import com.immunization.reference.model.GatewayResponse;
 
+import com.immunization.reference.model.PostHL7RequestBody;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostHL7Handler implements RequestHandler<Map<String, Object>, GatewayResponse> {
+public class PostHL7Handler implements RequestHandler<PostHL7RequestBody, GatewayResponse> {
 
     private final HandlerDependencies dependencies;
 
@@ -23,7 +24,7 @@ public class PostHL7Handler implements RequestHandler<Map<String, Object>, Gatew
         this.dependencies = dependencies;
     }
 
-    @Override public GatewayResponse handleRequest(final Map<String, Object> input, final Context context) {
+    @Override public GatewayResponse handleRequest(final PostHL7RequestBody input, final Context context) {
 
         final Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");

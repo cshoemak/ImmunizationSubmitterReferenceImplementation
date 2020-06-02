@@ -1,6 +1,6 @@
 package com.immunization.reference.model;
 
-public class TestHL7RequestBody {
+public class PostHL7RequestBody {
 
   private String hl7Payload;
   private ConnectionInfo connectionInfo;
