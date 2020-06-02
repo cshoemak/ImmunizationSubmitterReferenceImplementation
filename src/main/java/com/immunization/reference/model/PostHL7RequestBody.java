@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
 @Builder
 @RequiredArgsConstructor
 public class PostHL7RequestBody {
