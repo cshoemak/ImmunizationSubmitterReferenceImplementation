@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @Builder
 @RequiredArgsConstructor
-public class TestData {
+public class Covid19TestingResults {
 
   private String testType;
 

@@ -13,5 +13,5 @@ public class GenerateHL7RequestBody {
 
   private ConnectionInfo connectionInfo;
 
-  private TestData testData;
+  private Covid19TestingResults covid19TestingResults;
 }
