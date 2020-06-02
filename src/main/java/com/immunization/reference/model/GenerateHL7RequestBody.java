@@ -2,24 +2,24 @@ package com.immunization.reference.model;
 
 public class GenerateHL7RequestBody {
 
-  private PatientDetails patient;
-  private ConnectionInfo connection;
+  private PatientDetails patientDetails;
+  private ConnectionInfo connectionInfo;
   private String testResult;
 
-  public PatientDetails getPatient() {
-    return patient;
+  public PatientDetails getPatientDetails() {
+    return patientDetails;
   }
 
-  public void setPatient(PatientDetails patient) {
-    this.patient = patient;
+  public void setPatientDetails(PatientDetails patientDetails) {
+    this.patientDetails = patientDetails;
   }
 
-  public ConnectionInfo getConnection() {
-    return connection;
+  public ConnectionInfo getConnectionInfo() {
+    return connectionInfo;
   }
 
-  public void setConnection(ConnectionInfo connection) {
-    this.connection = connection;
+  public void setConnectionInfo(ConnectionInfo connectionInfo) {
+    this.connectionInfo = connectionInfo;
   }
 
   public String getTestResult() {
