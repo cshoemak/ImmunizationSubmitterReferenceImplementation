@@ -1,12 +1,13 @@
 package com.immunization.reference.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class GenerateHL7RequestBody {
 
   private PatientDetails patientDetails;

@@ -9,10 +9,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Covid19TestingResults {
 
-  private String testType;
+  private final String testType;
 
-  private String testResult;
+  private final String testResult;
 
-  private String testDate;
+  private final String testDate;
 
 }

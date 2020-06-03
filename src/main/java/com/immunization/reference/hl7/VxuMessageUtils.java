@@ -1,58 +1,84 @@
 package com.immunization.reference.hl7;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import com.immunization.reference.model.ConnectionInfo;
+import com.immunization.reference.model.Covid19TestingResults;
+import com.immunization.reference.model.PatientDetails;
+
 public class VxuMessageUtils {
 
-    public static String createHl7Message(final Covid19TestResults testResults) {
-        return constructMsh(testResults) +
-                constructPid(testResults) +
-                constructOrc(testResults) +
+    public static String createHl7Message(final PatientDetails patient, final Covid19TestingResults testResults, final ConnectionInfo connectionInfo) {
+        return constructMsh(connectionInfo) +
+                constructPid(patient) +
+                constructNk1(patient) +
+                constructOrc() +
                 constructRxa(testResults) +
                 constructObx(testResults);
     }
 
-    static String constructMsh(final Covid19TestResults testResults) {
-        return "MSH|^~\\&|STARLIMS.AR.STAG^2.16.840.1.114222.4.3.3.2.5.2^ISO"
-                + "|AR.LittleRock.SPHL^2.16.840.1.114222.4.1.20083^ISO|US WHO Collab LabSys^2.16.840.1.114222.4.3.3.7^ISO"
-                + "|CDC-EPI Surv Branch^2.16.840.1.114222.4.1.10416^ISO|20190422132236-0500||VXU^V04^VXU_V04|1312-2"
+    static String constructMsh(final ConnectionInfo connectionInfo) {
+        return "MSH|"
+        		+ "^~\\&"
+        		+ "|ISRI^0.1^ISO"
+                + "|AWS_ISRI^0.1^ISO"
+                + "|US WHO Collab LabSys^2.16.840.1.114222.4.3.3.7^ISO"
+                + "|CDC-EPI Surv Branch^2.16.840.1.114222.4.1.10416^ISO"
+                + "|" + generateHl7DateTime(new Date())
+                + "||VXU^V04^VXU_V04|1312-2"
                 + "|T|2.5.1|||ER|AL|||||Z22^CDCPHINVS\n";
     }
 
-    static String constructPid(final Covid19TestResults testResults) {
+    static String constructPid(final PatientDetails patient) {
         return "PID|1"
                 + "|"
-                + "|" + eIfN(testResults.getMrn()) + "^^^AIRA-TEST^MR"
+                + "|" + eIfN(patient.getMrn()) + "^^^" + eIfN(patient.getMrnAuthority()) + "^MR"
                 + "|"
-                + "|MarionAIRA^ColemanAIRA^Seamus^^^^L"
-                + "|JohnsonAIRA^EllieAIRA^^^^^M"
-                + "|" + eIfN(testResults.getDateOfBirth()) // PID-7
-                + "|" + eIfN(testResults.getSex()) // PID-8
+                + "|" + eIfN(patient.getNameLast()) + "^" + eIfN(patient.getNameFirst()) + "^" + eIfN(patient.getNameMiddle()) + "^^^^L"
+                + "|" + eIfN(patient.getMotherMaidenNameLast()) + "^^^^^^M"
+                + "|" + eIfN(patient.getDateOfBirth()) // PID-7
+                + "|" + eIfN(patient.getSex()) // PID-8
                 + "|"
-                + "|" + eIfN(testResults.getRace()) + "^^CDCREC"
-                + "|1329 Rerneuzen Ln^^Raisinvl Township^MI^48161^USA^P"
+                + "|" + eIfN(patient.getRace())
+                + "|" + eIfN(patient.getAddressLine1()) + "^" + eIfN(patient.getAddressLine2()) + "^" + eIfN(patient.getAddressCity()) + "^" + eIfN(patient.getAddressState()) + "^" + eIfN(patient.getAddressZip()) + "^USA^P"
                 + "|"
-                + "|^PRN^PH^^^" + eIfN(testResults.getPhoneAreaCode()) + "^" + eIfN(testResults.getPhoneNumber())
+                + "|^PRN^PH^^^" + eIfN(patient.getPhoneAreaCode()) + "^" + eIfN(patient.getPhoneNumber())
                 + "||||||||"
-                + "|" + eIfN(testResults.getEthnicity()) + "^^CDCREC"
+                + "|" + eIfN(patient.getEthnicity())
                 + "|\n";
     }
 
-    static String constructOrc(final Covid19TestResults testResults) {
-        return "ORC|RE||9999^IIS\n";
+    static String constructNk1(final PatientDetails patient) {
+    	return "NK1|1"
+    			+ "|" + patient.getGuardianNameLast() + "^^" + patient.getGuardianNameFirst() + "^^^^L"
+    			+ "|" + patient.getGuardianRelationship()
+    			+ "|94 Macomb Ln^^Kalamazoo^MI^49005^USA^P"
+    			+ "|^PRN^PH^^^269^5521655";
     }
 
-    static String constructRxa(final Covid19TestResults testResults) {
+    static String constructOrc() {
+        return "ORC|RE||9999^AIRA\n";
+    }
+
+    static String constructRxa(final Covid19TestingResults testResults) {
         return "RXA|0"
                 + "|1"
-                + "|" + eIfN(testResults.getObservationDate())
+                + "|" + eIfN(testResults.getTestDate())
                 + "||998^No Vaccination Administered^CVX|999||||||||||||||NA\n";
     }
 
-    static String constructObx(final Covid19TestResults testResults) {
+    /**
+     * Example segment: OBX|1|CE|94309-2^SARS-CoV-2 RNA XXX NAA+probe-Imp^LN|1|260373001^Detected^SCT||||||F|||20190714
+     * @param testResults
+     * @return
+     */
+    static String constructObx(final Covid19TestingResults testResults) {
         return "OBX|1"
-                + "|CWE"
-                + "|" + eIfN(testResults.getObservationCode()) + "^^" + eIfN(testResults.getObservationCodeSet()) + ""
+                + "|CE"
+                + "|" + eIfN(testResults.getTestType())
                 + "|"
-                + "|" + eIfN(testResults.getObservationResult()) + "^^" + eIfN(testResults.getObservationResultSet())
+                + "|" + eIfN(testResults.getTestResult())
                 + "||||||F||"
                 + "|201902281257-0500|||||201904020721-0500|||"
                 + "|Public Health Laboratory^D^^^^CLIA&2.16.840.1.113883.19.4.6&ISO^XX^^^05D0897628"
@@ -64,5 +90,13 @@ public class VxuMessageUtils {
      */
     static String eIfN(final String input) {
         return input == null ? "" : input;
+    }
+
+    /**
+     * HL7 specific date generator 
+     * @return a string in the format like 20190422132236-0500.
+     */
+    static String generateHl7DateTime(final Date datetime) {
+    	return new SimpleDateFormat("yyyymmddHHmmss-ZZZZ").format(datetime);
     }
 }

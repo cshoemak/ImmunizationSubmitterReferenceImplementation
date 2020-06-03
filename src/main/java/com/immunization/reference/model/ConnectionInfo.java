@@ -9,12 +9,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ConnectionInfo {
 
-  private String userId;
+  private final String userId;
 
-  private String password;
+  private final String password;
 
-  private String facility;
+  private final String facility;
 
-  private String iisUrl;
+  private final String iisUrl;
 
 }
