@@ -10,6 +10,8 @@ import com.immunization.reference.config.HandlerDependencies;
 import com.immunization.reference.manager.HL7MessageManager;
 import com.immunization.reference.manager.IISManager;
 import com.immunization.reference.model.GatewayResponse;
+import com.immunization.reference.model.GenerateHL7RequestBody;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -53,7 +55,7 @@ public class GenerateHL7HandlerTest {
         when(mockHL7MessageManager.generateTestMessage()).thenReturn(TEST_HL7_MESSAGE);
         when(mockIISManager.submitMessage(any(), any(), any(), eq(TEST_HL7_MESSAGE))).thenReturn(TEST_IIS_RESPONSE);
 
-        final GatewayResponse response = handler.handleRequest(new HashMap<>(), mockContext);
+        final GatewayResponse response = handler.handleRequest(GenerateHL7RequestBody.builder().build(), mockContext);
 
         assertEquals(TEST_IIS_RESPONSE, response.getBody());
 
@@ -66,7 +68,7 @@ public class GenerateHL7HandlerTest {
         when(mockIISManager.submitMessage(any(), any(), any(), eq(TEST_HL7_MESSAGE))).thenThrow(new RuntimeException());
 
         assertThrows(RuntimeException.class, () -> {
-            handler.handleRequest(new HashMap<>(), mockContext);
+            handler.handleRequest(GenerateHL7RequestBody.builder().build(), mockContext);
         });
     }
 }

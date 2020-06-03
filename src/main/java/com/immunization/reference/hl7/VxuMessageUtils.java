@@ -51,8 +51,8 @@ public class VxuMessageUtils {
 
     static String constructNk1(final PatientDetails patient) {
     	return "NK1|1"
-    			+ "|" + patient.getGuardianNameLast() + "^^" + patient.getGuardianNameFirst() + "^^^^L"
-    			+ "|" + patient.getGuardianRelationship()
+    			+ "|" + eIfN(patient.getGuardianNameLast()) + "^^" + eIfN(patient.getGuardianNameFirst()) + "^^^^L"
+    			+ "|" + eIfN(patient.getGuardianRelationship())
     			+ "|94 Macomb Ln^^Kalamazoo^MI^49005^USA^P"
     			+ "|^PRN^PH^^^269^5521655";
     }
