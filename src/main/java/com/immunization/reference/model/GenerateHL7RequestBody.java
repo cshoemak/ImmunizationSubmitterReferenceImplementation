@@ -15,4 +15,6 @@ public class GenerateHL7RequestBody {
   private ConnectionInfo connectionInfo;
 
   private Covid19TestingResults covid19TestingResults;
+
+  private String hl7Format;
 }
