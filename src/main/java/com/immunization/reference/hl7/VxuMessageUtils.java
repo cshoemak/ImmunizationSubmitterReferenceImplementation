@@ -53,10 +53,10 @@ public class VxuMessageUtils {
 
     static String constructNk1(final PatientDetails patient) {
         return "NK1|1"
-                + "|" + eIfN(patient.getGuardianNameLast()) + "^^" + eIfN(patient.getGuardianNameFirst()) + "^^^^L"
+                + "|" + eIfN(patient.getGuardianNameLast()) + "^" + eIfN(patient.getGuardianNameFirst()) + "^^^^^L"
                 + "|" + eIfN(patient.getGuardianRelationship())
                 + "|94 Macomb Ln^^Kalamazoo^MI^49005^USA^P"
-                + "|^PRN^PH^^^269^5521655";
+                + "|^PRN^PH^^^269^5521655\n";
     }
 
     static String constructOrc() {
@@ -79,12 +79,13 @@ public class VxuMessageUtils {
         return "OBX|1"
                 + "|CE"
                 + "|" + eIfN(testResults.getTestType())
-                + "|"
+                + "|1"
                 + "|" + eIfN(testResults.getTestResult())
-                + "||||||F||"
-                + "|201902281257-0500|||||201904020721-0500|||"
-                + "|Public Health Laboratory^D^^^^CLIA&2.16.840.1.113883.19.4.6&ISO^XX^^^05D0897628"
-                + "|3434 Industrial Loop^^Little Rock^AR^72205^USA^B\n";
+                + "|||||"
+                + "|F" // OBX-11
+                + "||"
+                + "|" + eIfN(testResults.getTestDate())
+                + "||||||||||\n";
     }
 
     /**
@@ -99,6 +100,6 @@ public class VxuMessageUtils {
      * @return a string in the format like 20190422132236-0500.
      */
     static String generateHl7DateTime(final Date datetime) {
-    	return new SimpleDateFormat("yyyymmddHHmmss-ZZZZ").format(datetime);
+    	return new SimpleDateFormat("yyyymmddHHmmssZZZZ").format(datetime);
     }
 }
