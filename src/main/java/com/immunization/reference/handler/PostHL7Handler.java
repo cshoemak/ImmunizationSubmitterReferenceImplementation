@@ -28,7 +28,11 @@ public class PostHL7Handler implements RequestHandler<PostHL7RequestBody, Gatewa
 
         final Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
+        final String response = dependencies.getIisManager().submitMessage(input.getConnectionInfo().getIisUrl(),
+                input.getConnectionInfo().getUserId(), input.getConnectionInfo().getPassword(),
+                input.getConnectionInfo().getFacility(), input.getHl7Payload()
+      );
 
-        return new GatewayResponse("Success", headers, 200);
+        return new GatewayResponse(response, headers, 200);
     }
 }
