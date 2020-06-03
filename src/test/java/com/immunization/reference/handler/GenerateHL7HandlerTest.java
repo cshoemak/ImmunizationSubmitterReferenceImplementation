@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.isA;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.immunization.reference.config.HandlerDependencies;
 import com.immunization.reference.manager.HL7MessageManager;
@@ -16,8 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.HashMap;
 
 public class GenerateHL7HandlerTest {
 
@@ -52,23 +51,23 @@ public class GenerateHL7HandlerTest {
     @Test
     public void hander_success() {
 
-        when(mockHL7MessageManager.generateTestMessage()).thenReturn(TEST_HL7_MESSAGE);
-        when(mockIISManager.submitMessage(any(), any(), any(), eq(TEST_HL7_MESSAGE))).thenReturn(TEST_IIS_RESPONSE);
+        when(mockHL7MessageManager.generateVXUMessage(isA(GenerateHL7RequestBody.class))).thenReturn(TEST_HL7_MESSAGE);
+//        when(mockIISManager.submitMessage(any(), any(), any(), eq(TEST_HL7_MESSAGE))).thenReturn(TEST_IIS_RESPONSE);
 
         final GatewayResponse response = handler.handleRequest(GenerateHL7RequestBody.builder().build(), mockContext);
 
-        assertEquals(TEST_IIS_RESPONSE, response.getBody());
+        assertEquals(TEST_HL7_MESSAGE, response.getBody());
 
     }
 
-    @Test
-    public void hander_iisManagerException_throwsException() {
-
-        when(mockHL7MessageManager.generateTestMessage()).thenReturn(TEST_HL7_MESSAGE);
-        when(mockIISManager.submitMessage(any(), any(), any(), eq(TEST_HL7_MESSAGE))).thenThrow(new RuntimeException());
-
-        assertThrows(RuntimeException.class, () -> {
-            handler.handleRequest(GenerateHL7RequestBody.builder().build(), mockContext);
-        });
-    }
+//    @Test
+//    public void hander_iisManagerException_throwsException() {
+//
+//        when(mockHL7MessageManager.generateTestMessage()).thenReturn(TEST_HL7_MESSAGE);
+////        when(mockIISManager.submitMessage(any(), any(), any(), eq(TEST_HL7_MESSAGE))).thenThrow(new RuntimeException());
+//
+//        assertThrows(RuntimeException.class, () -> {
+//            handler.handleRequest(GenerateHL7RequestBody.builder().build(), mockContext);
+//        });
+//    }
 }

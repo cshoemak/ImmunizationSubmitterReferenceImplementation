@@ -1,5 +1,8 @@
 package com.immunization.reference.manager;
 
+import com.immunization.reference.hl7.VxuMessageUtils;
+import com.immunization.reference.model.GenerateHL7RequestBody;
+
 public class HL7MessageManager {
 
     public String generateTestMessage() {
@@ -14,5 +17,11 @@ public class HL7MessageManager {
                 + "OBX|2|CE|30956-7^Vaccine Type^LN|2|21^Varicella^CVX||||||F|\n"
                 + "OBX|3|TS|29768-9^Date vaccine information statement published^LN|2|20080313||||||F|\n"
                 + "OBX|4|TS|29769-7^Date vaccine information statement presented^LN|2|20200528||||||F|";
+    }
+
+    public String generateVXUMessage(final GenerateHL7RequestBody requestBody) {
+        return VxuMessageUtils.createHl7Message(requestBody.getPatientDetails(),
+                requestBody.getCovid19TestingResults(),
+                requestBody.getConnectionInfo());
     }
 }

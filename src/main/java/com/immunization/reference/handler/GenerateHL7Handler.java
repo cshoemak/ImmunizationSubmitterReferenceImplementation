@@ -28,11 +28,11 @@ public class GenerateHL7Handler implements RequestHandler<GenerateHL7RequestBody
         final Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
-        final String hl7Message = dependencies.getHl7MessageManager().generateTestMessage();
-        final String response = dependencies.getIisManager().submitMessage(
-                "test_iis_username", "test123", "test_iis_facility", hl7Message
-        );
+        final String hl7Message = dependencies.getHl7MessageManager().generateVXUMessage(input);
+//        final String response = dependencies.getIisManager().submitMessage(
+//                "test_iis_username", "test123", "test_iis_facility", hl7Message
+//        );
 
-        return new GatewayResponse(response, headers, 200);
+        return new GatewayResponse(hl7Message, headers, 200);
     }
 }

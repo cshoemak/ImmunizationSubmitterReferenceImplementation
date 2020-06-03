@@ -9,7 +9,9 @@ import com.immunization.reference.model.PatientDetails;
 
 public class VxuMessageUtils {
 
-    public static String createHl7Message(final PatientDetails patient, final Covid19TestingResults testResults, final ConnectionInfo connectionInfo) {
+    public static String createHl7Message(final PatientDetails patient,
+            final Covid19TestingResults testResults,
+            final ConnectionInfo connectionInfo) {
         return constructMsh(connectionInfo) +
                 constructPid(patient) +
                 constructNk1(patient) +
@@ -20,8 +22,8 @@ public class VxuMessageUtils {
 
     static String constructMsh(final ConnectionInfo connectionInfo) {
         return "MSH|"
-        		+ "^~\\&"
-        		+ "|ISRI^0.1^ISO"
+                + "^~\\&"
+                + "|ISRI^0.1^ISO"
                 + "|AWS_ISRI^0.1^ISO"
                 + "|US WHO Collab LabSys^2.16.840.1.114222.4.3.3.7^ISO"
                 + "|CDC-EPI Surv Branch^2.16.840.1.114222.4.1.10416^ISO"
@@ -50,11 +52,11 @@ public class VxuMessageUtils {
     }
 
     static String constructNk1(final PatientDetails patient) {
-    	return "NK1|1"
-    			+ "|" + eIfN(patient.getGuardianNameLast()) + "^^" + eIfN(patient.getGuardianNameFirst()) + "^^^^L"
-    			+ "|" + eIfN(patient.getGuardianRelationship())
-    			+ "|94 Macomb Ln^^Kalamazoo^MI^49005^USA^P"
-    			+ "|^PRN^PH^^^269^5521655";
+        return "NK1|1"
+                + "|" + eIfN(patient.getGuardianNameLast()) + "^^" + eIfN(patient.getGuardianNameFirst()) + "^^^^L"
+                + "|" + eIfN(patient.getGuardianRelationship())
+                + "|94 Macomb Ln^^Kalamazoo^MI^49005^USA^P"
+                + "|^PRN^PH^^^269^5521655";
     }
 
     static String constructOrc() {
