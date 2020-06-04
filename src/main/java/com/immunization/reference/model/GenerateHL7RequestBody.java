@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class GenerateHL7RequestBody {
 

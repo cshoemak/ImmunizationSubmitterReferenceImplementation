@@ -35,7 +35,12 @@ public class GenerateHL7Handler implements RequestHandler<Map<String, Object>, G
 
             final Map<String, String> headers = new HashMap<>();
             headers.put("Content-Type", "application/json");
-            return new GatewayResponse(hl7Message, headers, 200);
+            headers.put("Access-Control-Allow-Origin", "*");
+
+            final Map<String, String> response = new HashMap<>();
+            response.put("hl7Message", hl7Message);
+
+            return new GatewayResponse(dependencies.getMapper().writeValueAsString(response), headers, 200);
         } catch (final Exception ex) {
             throw new RuntimeException(ex);
         }
