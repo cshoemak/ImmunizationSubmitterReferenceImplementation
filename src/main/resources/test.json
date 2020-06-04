@@ -1,0 +1,20 @@
+{
+  "patientDetails": {
+    "mrn": "MRN1",
+    "mrnAuthority": "MRNAuth",
+    "nameFirst": "Mel",
+    "sex": "M",
+    "race": "17862-0^White^CDCREC",
+    "phoneNumber": "8675309",
+    "dateOfBirth": "20010503",
+    "guardianNameFirst": "Martha"
+  },
+  "covid19TestingResults": {
+    "testType": "94763-0^SARS-CoV-2 XXX Ql Cult^LN",
+    "testResult": "260373001^Detected^SCT",
+    "testDate": "20200503"
+  },
+  "connectionInfo": {
+    "facility": "FAC_23"
+  }
+}
