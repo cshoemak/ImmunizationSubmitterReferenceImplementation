@@ -24,9 +24,9 @@ public class VxuMessageUtils {
         return "MSH|"
                 + "^~\\&"
                 + "|ISRI^0.1^ISO"
-                + "|AWS_ISRI^0.1^ISO"
-                + "|US WHO Collab LabSys^2.16.840.1.114222.4.3.3.7^ISO"
-                + "|CDC-EPI Surv Branch^2.16.840.1.114222.4.1.10416^ISO"
+                + "|" + connectionInfo.getFacility() + "^^"
+                + "|"
+                + "|"
                 + "|" + generateHl7DateTime(new Date())
                 + "||VXU^V04^VXU_V04|1312-2"
                 + "|T|2.5.1|||ER|AL|||||Z22^CDCPHINVS\n";
@@ -55,8 +55,8 @@ public class VxuMessageUtils {
         return "NK1|1"
                 + "|" + eIfN(patient.getGuardianNameLast()) + "^" + eIfN(patient.getGuardianNameFirst()) + "^^^^^L"
                 + "|" + eIfN(patient.getGuardianRelationship())
-                + "|94 Macomb Ln^^Kalamazoo^MI^49005^USA^P"
-                + "|^PRN^PH^^^269^5521655\n";
+                + "|"
+                + "|\n";
     }
 
     static String constructOrc() {
@@ -100,6 +100,6 @@ public class VxuMessageUtils {
      * @return a string in the format like 20190422132236-0500.
      */
     static String generateHl7DateTime(final Date datetime) {
-    	return new SimpleDateFormat("yyyymmddHHmmssZZZZ").format(datetime);
+    	return new SimpleDateFormat("yyyyMMddHHmmssZZZZ").format(datetime);
     }
 }
