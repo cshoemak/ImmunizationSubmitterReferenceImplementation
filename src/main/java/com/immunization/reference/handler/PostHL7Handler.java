@@ -1,6 +1,7 @@
 package com.immunization.reference.handler;
 
 import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.immunization.reference.config.HandlerDependencies;
 import com.immunization.reference.model.ConnectionInfo;
@@ -46,6 +47,11 @@ public class PostHL7Handler implements RequestHandler<Map<String, Object>, Gatew
 
             final Map<String, String> response = new HashMap<>();
             response.put("response", ack);
+
+            final LambdaLogger logger = context.getLogger();
+            // log endpoint and username (not password)
+            logger.log(String.format("IIS submission being made to userId: %s, endpoint: %s",
+                    connectionInfo.getUserId(), connectionInfo.getIisUrl()));
 
             return new GatewayResponse(dependencies.getMapper().writeValueAsString(response), headers, 200);
         } catch (final Exception ex) {
